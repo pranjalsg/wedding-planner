@@ -2,8 +2,46 @@ import java.util.Scanner;
 import java.io.*;
 class Users
 {
-	String username, password;
-	public int createUser()
+	private String username, password;
+	
+	public boolean checkUserExists(String usr) throws FileNotFoundException
+	{
+		char choice = 'a';
+		boolean flag = false;
+		Scanner scfile;
+		File file;
+		try
+		{
+			file = new File(usr + ".txt");
+			scfile = new Scanner(file);
+		}
+		catch(FileNotFoundException e)
+		{
+			return false;
+		}
+		Scanner sc = new Scanner(System.in);
+		if(file.exists() && !file.isDirectory())
+		{
+			System.out.print("Enter Password: ");
+			do
+			{
+				String pwd = sc.next() + sc.nextLine();
+				if(pwd.equals(scfile.next()))
+				flag = true;
+				else
+				{
+					System.out.print("Incorrect User ID or Password! Try again (t) or any other character to Create new User: ");
+					choice = (sc.next()).charAt(0);
+				}
+			}while(choice=='c');
+		}
+		else
+			return flag;
+		
+		return flag;
+	}
+	
+	public int createUser() throws FileNotFoundException
 	{
 		/******************
 		
@@ -17,13 +55,28 @@ class Users
 		*Any special arrangements required?
 		
 		*******************/
+		int stat = -1;
+		String username = "";
 		
 		try
 		{
 			Scanner sc = new Scanner(System.in);
-			System.out.print("Enter Username (must not contain spaces, '.', or '/'): ");
-			username = sc.next();
-			FileWriter writer = new FileWriter(username+".txt");
+			
+			File file;
+			do
+			{
+				System.out.print("Create Username (must not contain spaces, '.', or '/'): ");
+				username = sc.next();
+				file = new File(username + ".txt");
+				if(file.exists() && !file.isDirectory())
+				{
+					System.out.println("Username already exists! Try again!");
+					continue;
+				}
+			}while(file.exists() && !file.isDirectory());
+			
+			FileWriter writer = new FileWriter(username + ".txt");
+			
 			System.out.print("Create a password: ");
 			writer.write(sc.next()+sc.nextLine()+"\n");
 			System.out.print("Enter Name of Groom: ");
@@ -37,20 +90,51 @@ class Users
 			System.out.print("Please mention any special arrangements needed (if any): ");
 			writer.write(sc.next()+sc.nextLine()+"\n");
 			writer.close();
+			stat = 0;
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			System.out.println("Error saving details!");
 		}
-		return 0;
+		return stat;
+	}
+	
+	public boolean checkEventPlanned(String usr) throws FileNotFoundException
+	{
+		File file = new File(usr + "plan.txt");
+		if(file.exists() && !file.isDirectory())
+		{
+			return true;
+		}
+		else
+			return false;
 	}
 }
 public class Main
 {
 	public static void main(String[] args) throws IOException
 	{
+		Scanner sc = new Scanner(System.in);
 		Users user = new Users();
-		int id = user.createUser();
-		System.out.println("User created with id = " + id);
+		
+		System.out.print("Enter username: ");
+		String username = sc.next();
+		if(user.checkUserExists(username))
+		{
+			if(user.checkEventPlanned(username))
+			{
+				System.out.println("Congratulations! Your event has been planned!");
+			}
+			else
+				System.out.println("Sorry but your event hasn't been planned yet. Try again later!");
+		}
+		else
+		{
+			int stat = user.createUser();
+			if(stat == -1)
+			System.out.println("Error creating User!");
+			else
+			System.out.println("User created successfully!");
+		}	
 	}
 }
