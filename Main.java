@@ -22,18 +22,22 @@ class Users
 		Scanner sc = new Scanner(System.in);
 		if(file.exists() && !file.isDirectory())
 		{
-			System.out.print("Enter Password: ");
+			String rpwd = scfile.next()+scfile.nextLine();
 			do
 			{
+				System.out.print("Enter Password: ");
 				String pwd = sc.next() + sc.nextLine();
-				if(pwd.equals(scfile.next()))
-				flag = true;
+				if(rpwd.equals(pwd))
+				{
+					flag = true;
+					break;
+				}
 				else
 				{
-					System.out.print("Incorrect User ID or Password! Try again (t) or any other character to Create new User: ");
+					System.out.print("Incorrect User ID or Password! Try again (t) or enter any other character to Create new User: ");
 					choice = (sc.next()).charAt(0);
 				}
-			}while(choice=='c');
+			}while(choice=='t');
 		}
 		else
 			return flag;
@@ -83,6 +87,10 @@ class Users
 			writer.write(sc.next()+sc.nextLine()+"\n");
 			System.out.print("Enter Name of Bride: ");
 			writer.write(sc.next()+sc.nextLine()+"\n");
+			System.out.print("Enter proposed Date of Wedding: ");
+			writer.write(sc.next()+sc.nextLine()+"\n");
+			System.out.print("Enter proposed Place of Wedding: ");
+			writer.write(sc.next()+sc.nextLine()+"\n");
 			System.out.print("Enter your budget: Rs. ");
 			writer.write(sc.next()+sc.nextLine()+"\n");
 			System.out.print("Enter the number of attendees: ");
@@ -99,15 +107,31 @@ class Users
 		return stat;
 	}
 	
-	public boolean checkEventPlanned(String usr) throws FileNotFoundException
+	public int checkEventPlanned(String usr) throws FileNotFoundException
 	{
 		File file = new File(usr + "plan.txt");
+		
 		if(file.exists() && !file.isDirectory())
 		{
-			return true;
+			Scanner scf = new Scanner(file);
+			return Integer.parseInt(scf.next());
 		}
 		else
-			return false;
+			return -1;
+	}
+	
+	public void showPlan(String usr) throws FileNotFoundException
+	{
+		File file = new File(usr + "plan.txt");
+		
+		Scanner sc = new Scanner(file);
+		System.out.println("\nYou have been billed " + sc.nextLine() + " for the plan.");
+		while(sc.hasNext())
+		{
+			System.out.println(sc.nextLine());
+		}
+		System.out.println();
+		sc.close();
 	}
 }
 public class Main
@@ -121,9 +145,15 @@ public class Main
 		String username = sc.next();
 		if(user.checkUserExists(username))
 		{
-			if(user.checkEventPlanned(username))
+			int status = user.checkEventPlanned(username);
+			if(status != -1)
 			{
-				System.out.println("Congratulations! Your event has been planned!");
+				System.out.print("Congratulations! Your event has been planned! Your bill is Rs. " + status + ". Continue (y/n)?");
+				char ch = sc.next().charAt(0);
+				if(ch=='y' || ch=='Y')
+				{
+					user.showPlan(username);
+				}
 			}
 			else
 				System.out.println("Sorry but your event hasn't been planned yet. Try again later!");
