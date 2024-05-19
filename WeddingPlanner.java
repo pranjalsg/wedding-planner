@@ -235,7 +235,7 @@ class LoginFromMainPage extends JFrame {
                             userDetailsPage.setVisible(true);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(LoginFromMainPage.this, "Invalid User ID or Password! Try again or Create new User or Contact 9877677767 for help!");
+                        JOptionPane.showMessageDialog(LoginFromMainPage.this, "Invalid User ID or Password! Try again or Create new User or Contact 9999999999 for help!");
                     }
                 } else {
                     JOptionPane.showMessageDialog(LoginFromMainPage.this, "Username and password are required!");
@@ -574,7 +574,7 @@ class PlannedWeddingPage extends JFrame {
             }
             reader.close();
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Sorry, your wedding hasn't been planned yet! Check back again soon. For more details contact 9877677767 or visit our website www.whimsicalvows.com\nPlease close any blank window that may open!");
+            JOptionPane.showMessageDialog(this, "Sorry, your wedding hasn't been planned yet! Check back again soon. For more details contact 9999999999 or visit our website www.whimsicalvows.com\nPlease close any blank window that may open!");
         }
         weddingDetails += "</html>";
 
