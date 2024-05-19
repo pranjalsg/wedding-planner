@@ -63,7 +63,7 @@ The details that the user inputs are saved in a file named **BenCooper_details.t
 
 The program checks if the event has been planned by checking the existence of a file named **BenCooper_plan.txt**. 
 
-The planner on the backend must write his plan and save it as **BenCooper_plan.txt**  in the same folder.
+The planner on the backend must write their plan and save it as **BenCooper_plan.txt**  in the same folder.
 
 The entries of this file is shown in the program.
 
