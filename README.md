@@ -71,7 +71,7 @@ The entries of this file is shown in the program.
 
 ## Creators
 
-Sumedha Roy
-Aryama Dutta
-Pranjal Sengupta
+Sumedha Roy\
+Aryama Dutta\
+Pranjal Sengupta\
 Archisman Das
