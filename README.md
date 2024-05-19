@@ -16,7 +16,7 @@ The following window will open
 
 ![mainpage](screenshots/mainpage.png "Homepage")
 
-###For a First-time User
+### For a First-time User
 
 Click on the **New User Registration** button.
 
@@ -28,7 +28,7 @@ Click on the **Sign Up** button, create a Username & Password and click on **Sub
 
 Your credentials will be saved.
 
-###After Registration
+### After Registration
 
 Go to the Homepage and click on **Existing User Login** button. Fill up your credentials and login.
 
@@ -38,7 +38,7 @@ Fill up the required details and click on **Submit**. You will get a confirmatio
 
 ![detailssaved](screenshots/detailssaved.png "Confirmation")
 
-###To Check whether Event has been Planned
+### To Check whether Event has been Planned
 
 Use the **Existing User Login** again and login to check whether the event has been planned.
 
@@ -52,7 +52,7 @@ On the other hand, if it has been planned, you will be shown the detailed plan.
 
 ------------
 
-##  How It Works
+## How It Works
 Let us create a Username: **BenCooper** and Password: **benjamin**
 
 During the first time **Sign Up**, it creates a file **BenCooper.txt** where it stores the Username and Password.
@@ -66,3 +66,12 @@ The program checks if the event has been planned by checking the existence of a 
 The planner on the backend must write his plan and save it as **BenCooper_plan.txt**  in the same folder.
 
 The entries of this file is shown in the program.
+
+------------
+
+## Creators
+
+Sumedha Roy
+Aryama Dutta
+Pranjal Sengupta
+Archisman Das
